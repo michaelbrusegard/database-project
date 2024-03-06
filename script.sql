@@ -122,7 +122,7 @@ CREATE TABLE employees (
 CREATE TABLE tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     play_id INTEGER NOT NULL,
-    task VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
     employee_id INTEGER NOT NULL,
     FOREIGN KEY (play_id) REFERENCES plays(id),
     FOREIGN KEY (employee_id) REFERENCES employees(id)

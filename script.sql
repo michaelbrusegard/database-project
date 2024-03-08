@@ -57,11 +57,11 @@ CREATE TABLE ticket_prices (
 );
 
 CREATE TABLE tickets (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
     showing_id INTEGER NOT NULL,
     seat_id INTEGER NOT NULL,
     ticket_purchase_id INTEGER NOT NULL,
     ticket_price_id INTEGER NOT NULL,
+    PRIMARY KEY (showing_id, seat_id, ticket_purchase_id),
     FOREIGN KEY (showing_id) REFERENCES showings(id),
     FOREIGN KEY (seat_id) REFERENCES seats(id),
     FOREIGN KEY (ticket_purchase_id) REFERENCES ticket_purchases(id),

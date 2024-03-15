@@ -1,14 +1,15 @@
 import sqlite3
 
-connection = sqlite3.connect('trondelag_theatre.db')
-cursor = connection.cursor()
 
 def find_showings(date):
+    connection = sqlite3.connect('trondelag_theatre.db')
+    cursor = connection.cursor()
+    
     query = """
     SELECT 
         p.name AS PlayName,
         s.time AS ShowTime,
-        COALESCE(COUNT(*), 0) AS TicketsSold
+        COALESCE(COUNT(t.showing_id), 0) AS TicketsSold
     FROM showings s
     JOIN plays p ON s.play_id = p.id
     LEFT JOIN tickets t ON s.id = t.showing_id
@@ -29,4 +30,6 @@ def find_showings(date):
 
     connection.close()
 
+find_showings('2024-02-02')
 find_showings('2024-02-03')
+find_showings('2024-02-04')

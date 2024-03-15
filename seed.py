@@ -32,13 +32,13 @@ cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-0
 cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-06 19:00:00", kongsemnene_play_id))
 
 # 3. feb, 6. feb, 7. feb, 12. feb, 13. feb og 14. feb at 18:30 for "Størst av alt er kjærligheten"
-cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-03-01 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
+cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-03 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
 storst_av_alt_er_kjaerligheten_3feb_showing_id = cursor.lastrowid
-cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-06-02 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
-cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-07-03 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
-cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-12-05 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
-cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-13-01 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
-cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-14-02 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
+cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-06 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
+cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-07 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
+cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-12 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
+cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-13 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
+cursor.execute('INSERT INTO showings (time, play_id) VALUES (?, ?)', ("2024-02-14 18:30:00", storst_av_alt_er_kjaerligheten_play_id))
 
 # Add the ticket prices for "Kongsemnene" from the assignment
 cursor.execute('INSERT INTO ticket_prices (group_category, price, play_id) VALUES (?, ?, ?)', ("Ordinary", 450, kongsemnene_play_id))

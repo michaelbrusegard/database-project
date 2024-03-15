@@ -94,7 +94,7 @@ seat_number = 0
 row_number = 0
 
 # Iterate over each line in the file
-for i, line in enumerate(lines):
+for i, line in reversed(list(enumerate(lines))):
     # Skip the first line
     if i == 0:
         continue
@@ -109,6 +109,8 @@ for i, line in enumerate(lines):
         area_counter += 1
     else:
         row_number += 1
+        if hovedscenen_areas[area_counter] == "Galleri":
+            row_number = None
         # Iterate over each character and create a seat only if the character is '0' or '1'
         for j, char in enumerate(line):
             seat_number += 1

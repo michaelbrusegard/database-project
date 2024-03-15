@@ -34,4 +34,5 @@ def find_actor_and_coactors(actor_name):
     connection.close()
 
 find_actor_and_coactors("Tom Hanks")
-find_actor_and_coactors("Håkon Håkonson")
+find_actor_and_coactors("Arturo Scotti")
+find_actor_and_coactors("Snorre Ryen Tøndel")

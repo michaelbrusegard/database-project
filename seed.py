@@ -83,32 +83,24 @@ for i, line in enumerate(lines):
     line = line.strip() 
 
     if line.isalpha():
-        hovedscenen_areas.append(line)
-
-hovedscenen_areas.reverse()
-
-print(hovedscenen_areas)
+        cursor.execute('INSERT INTO areas (name, hall_id) VALUES (?, ?)', (line, hovedscenen_hall_id))
+        hovedscenen_areas.append(cursor.lastrowid)
 
 # Initialize variables
-current_area = None
-area_counter = 0
+current_area = hovedscenen_areas.pop()
 seat_number = 0
 row_number = 0
 
 # Iterate over each line in the file
 for i, line in reversed(list(enumerate(lines))):
-    # Skip the first line
-    if i == 0:
+    # Skip the first line and the second line
+    if i == 0 or i == 1:
         continue
 
     line = line.strip()  # Remove trailing newline
-
     # Check if the line contains a word or a series of characters
     if line.isalpha():
-        # Add an area
-        cursor.execute('INSERT INTO areas (name, hall_id) VALUES (?, ?)', (hovedscenen_areas[area_counter], hovedscenen_hall_id))
-        current_area = cursor.lastrowid
-        area_counter += 1
+        current_area = hovedscenen_areas.pop()
     else:
         row_number += 1
         # Iterate over each character and create a seat only if the character is '0' or '1'

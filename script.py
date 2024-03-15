@@ -146,23 +146,22 @@ tronder_role_id = cursor.lastrowid
 cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Baard Bratte"))
 baard_bratte_role_id = cursor.lastrowid
 
-# TRENGER VI DENNE?
 
-# # Add roles to the "Størst av alt er kjærligheten" play
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Sunniva Du Mond Nordal"))
-# sunniva_du_mond_nordal_role_id = cursor.lastrowid
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Jo Saberniak"))
-# jo_saberniak_role_id = cursor.lastrowid
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Marte M Steinholt"))
-# marte_m_steinholt_role_id = cursor.lastrowid
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Tor Ivar Hagen"))
-# tor_ivar_hagen_role_id = cursor.lastrowid
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Trond-Ove Skrødal"))
-# trond_ove_skrodal_role_id = cursor.lastrowid
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Natalie Grøndahl Tangen"))
-# natalie_grondahl_tangen_role_id = cursor.lastrowid
-# cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Åsmund Flaten"))
-# asmund_flaten_role_id = cursor.lastrowid
+# Add roles to the "Størst av alt er kjærligheten" play
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Sunniva Du Mond Nordal"))
+sunniva_du_mond_nordal_role_id = cursor.lastrowid
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Jo Saberniak"))
+jo_saberniak_role_id = cursor.lastrowid
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Marte M Steinholt"))
+marte_m_steinholt_role_id = cursor.lastrowid
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Tor Ivar Hagen"))
+tor_ivar_hagen_role_id = cursor.lastrowid
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Trond-Ove Skrødal"))
+trond_ove_skrodal_role_id = cursor.lastrowid
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Natalie Grøndahl Tangen"))
+natalie_grondahl_tangen_role_id = cursor.lastrowid
+cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Åsmund Flaten"))
+asmund_flaten_role_id = cursor.lastrowid
 
 
 # Add actors to the "Størst av alt er kjærligheten" play
@@ -208,6 +207,25 @@ snorre_ryen_tondel_actor_id = cursor.lastrowid
 cursor.execute('INSERT INTO actors (name) VALUES (?)', ("Madeleine Brantzæg Nilsen"))
 madeleine_brantzaeg_nilsen_actor_id = cursor.lastrowid
 
+
+# Add the played_by relationships for the "Størst av alt er kjærligheten" play
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (sunniva_du_mond_nordal_role_id, sunniva_du_mond_nordal_actor_id))
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (jo_saberniak_role_id, jo_saberniak_actor_id))
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (marte_m_steinholt_role_id, marte_m_steinholt_actor_id))
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (tor_ivar_hagen_role_id, tor_ivar_hagen_actor_id))
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (trond_ove_skrodal_role_id, trond_ove_skrodal_actor_id))
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (natalie_grondahl_tangen_role_id, natalie_grondahl_tangen_actor_id))
+cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (asmund_flaten_role_id, asmund_flaten_actor_id))
+
+
+# Add the roles_in_act relationships for the "Størst av alt er kjærligheten" play
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, sunniva_du_mond_nordal_role_id))
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, jo_saberniak_role_id))
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, marte_m_steinholt_role_id))
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, tor_ivar_hagen_role_id))
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, trond_ove_skrodal_role_id))
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, natalie_grondahl_tangen_role_id))
+cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (1, asmund_flaten_role_id))
 
 # Add the played_by relationships for the "Kongsemnene" play
 cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (hakon_hakonson_role_id, arturo_scotti_actor_id))

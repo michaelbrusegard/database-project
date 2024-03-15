@@ -88,6 +88,7 @@ for i, line in enumerate(lines):
 
 # Initialize variables
 current_area = hovedscenen_areas.pop()
+noRow = False
 seat_number = 0
 row_number = 0
 
@@ -101,16 +102,17 @@ for i, line in reversed(list(enumerate(lines))):
     # Check if the line contains a word or a series of characters
     if line.isalpha():
         current_area = hovedscenen_areas.pop()
+        noRow = True
     else:
         row_number += 1
         # Iterate over each character and create a seat only if the character is '0' or '1'
         for j, char in enumerate(line):
             seat_number += 1
             if char == '0':
-                cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
+                cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (None if noRow else row_number, seat_number, hovedscenen_hall_id, current_area))
                 
             elif char == '1':
-                cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
+                cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (None if noRow else row_number, seat_number, hovedscenen_hall_id, current_area))
                 seat_id = cursor.lastrowid
                 cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
 

@@ -94,11 +94,10 @@ for i, line in enumerate(lines):
     else:
         # Iterate over each character and create a seat only if the character is '0' or '1'
         for j, char in enumerate(line):
+            seat_number += 1
             if char == '0':
-                seat_number += 1
                 cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (i, seat_number, hovedscenen_hall_id, current_area))
             elif char == '1':
-                seat_number += 1
                 cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (i, seat_number, hovedscenen_hall_id, current_area))
                 seat_id = cursor.lastrowid
                 cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))

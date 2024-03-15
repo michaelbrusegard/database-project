@@ -50,7 +50,7 @@ CREATE TABLE ticket_purchases (
 
 CREATE TABLE ticket_prices (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    group TEXT NOT NULL,
+    group_category TEXT NOT NULL,
     price REAL NOT NULL,
     play_id INTEGER NOT NULL,
     FOREIGN KEY (play_id) REFERENCES plays(id)

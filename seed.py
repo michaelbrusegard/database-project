@@ -81,7 +81,7 @@ seat_number = 520
 row_number = len(lines) - 3
 
 # Iterate over each line in the file
-for i, line in reversed(list(enumerate(lines))):
+for i, line in enumerate(lines):
     # Skip the first line
     if i == 0:
         continue
@@ -98,10 +98,10 @@ for i, line in reversed(list(enumerate(lines))):
         if current_area_name == "Galleri":
             for j, char in enumerate(line):
                 if char == '0':
-                    cursor.execute('INSERT INTO seats (chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (seat_number, hovedscenen_hall_id, current_area))
+                    cursor.execute('INSERT INTO seats (chair_number, hall_id, area_id) VALUES (?, ?, ?)', (seat_number, hovedscenen_hall_id, current_area))
                     
                 elif char == '1':
-                    cursor.execute('INSERT INTO seats (chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (seat_number, hovedscenen_hall_id, current_area))
+                    cursor.execute('INSERT INTO seats (chair_number, hall_id, area_id) VALUES (?, ?, ?)', (seat_number, hovedscenen_hall_id, current_area))
                     seat_id = cursor.lastrowid
                     cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
                 seat_number -= 1

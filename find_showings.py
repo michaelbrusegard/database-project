@@ -1,10 +1,9 @@
 import sqlite3
 
+connection = sqlite3.connect('trondelag_theatre.db')
+cursor = connection.cursor()
 
 def find_showings(date):
-    connection = sqlite3.connect('trondelag_theatre.db')
-    cursor = connection.cursor()
-    
     query = """
     SELECT 
         p.name AS PlayName,
@@ -28,8 +27,8 @@ def find_showings(date):
     else:
         print(f"No showings on {date}.")
 
-    connection.close()
-
 find_showings('2024-02-02')
 find_showings('2024-02-03')
 find_showings('2024-02-04')
+
+connection.close()

@@ -76,13 +76,13 @@ with open('files needed/hovedscenen.txt', 'r') as f:
 
 # Initialize variables
 current_area = None
-seat_number = 0
-row_number = 0
+seat_number = 521
+row_number = len(lines) - 2
 
 # Iterate over each line in the file
-for i, line in reversed(list(enumerate(lines))):
+for i, line in enumerate(lines):
     # Skip the first line
-    if i == len(lines) - 1:
+    if i == 0:
         continue
 
     line = line.strip()  # Remove trailing newline
@@ -94,9 +94,9 @@ for i, line in reversed(list(enumerate(lines))):
         current_area = cursor.lastrowid
     else:
         # Iterate over each character and create a seat only if the character is '0' or '1'
-        row_number += 1
+        row_number -= 1
         for j, char in enumerate(line):
-            seat_number += 1
+            seat_number -= 1
             if char == '0':
                 cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (i, seat_number, hovedscenen_hall_id, current_area))
             elif char == '1':

@@ -77,6 +77,7 @@ with open('files needed/hovedscenen.txt', 'r') as f:
 # Initialize variables
 current_area = None
 seat_number = 0
+row_number = len(lines) - 3
 
 # Iterate over each line in the file
 for i, line in enumerate(lines):
@@ -93,6 +94,7 @@ for i, line in enumerate(lines):
         current_area = cursor.lastrowid
     else:
         # Iterate over each character and create a seat only if the character is '0' or '1'
+        row_number -= 1
         for j, char in enumerate(line):
             seat_number += 1
             if char == '0':
@@ -108,6 +110,7 @@ with open('files needed/gamle-scene.txt', 'r') as f:
 
 # Initialize variables
 current_area = None
+row_number = 0
 
 # Iterate over each line in the file
 for i, line in enumerate(lines):
@@ -119,10 +122,12 @@ for i, line in enumerate(lines):
 
     # Check if the line contains a word or a series of characters
     if line.isalpha():
+        row_number = 0
         # Add an area
         cursor.execute('INSERT INTO areas (name, hall_id) VALUES (?, ?)', (line, gamle_scene_hall_id))
         current_area = cursor.lastrowid
     else:
+        row_number += 1
         seat_number = 0
         # Iterate over each character and create a seat only if the character is '0' or '1'
         for j, char in enumerate(line):

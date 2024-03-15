@@ -21,7 +21,6 @@ kongsemnene_play_id = cursor.lastrowid
 cursor.execute('INSERT INTO plays (name, hall_id) VALUES ("Størst av alt er kjærligheten", ?)', (gamle_scene_hall_id,))
 storst_av_alt_er_kjaerligheten_play_id = cursor.lastrowid
 
-
 # Add showings for the plays "Kongsemnene" and "Størst av alt er kjærligheten" to the showings table with the times specified in the assignment
 
 # 1. feb, 2. feb, 3, feb, 5. feb og 6. feb at 19:00 for "Kongsemnene"
@@ -116,7 +115,6 @@ for i, line in reversed(list(enumerate(lines))):
                 seat_id = cursor.lastrowid
                 cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
 
-
 with open('files needed/gamle-scene.txt', 'r') as f:
     lines = f.readlines()
 
@@ -169,7 +167,6 @@ for i, line in enumerate(lines):
                     cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', 
                                    (storst_av_alt_er_kjaerligheten_3feb_showing_id, seat_id, storst_av_alt_er_kjaerligheten_ticket_purchase_id, group_10_storst_av_alt_er_kjaerligheten_ticket_price_id))
 
-
 # Add the acts for the "Kongsemnene" play
 cursor.execute('INSERT INTO acts (number, name, play_id) VALUES (?, ?, ?)', (1, "Act 1", kongsemnene_play_id))
 kongsemnene_act1_id = cursor.lastrowid
@@ -220,7 +217,6 @@ tronder_role_id = cursor.lastrowid
 cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Baard Bratte",))
 baard_bratte_role_id = cursor.lastrowid
 
-
 # Add roles to the "Størst av alt er kjærligheten" play
 cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Sunniva Du Mond Nordal",))
 sunniva_du_mond_nordal_role_id = cursor.lastrowid
@@ -237,7 +233,6 @@ natalie_grondahl_tangen_role_id = cursor.lastrowid
 cursor.execute('INSERT INTO roles (name) VALUES (?)', ("Åsmund Flaten",))
 asmund_flaten_role_id = cursor.lastrowid
 
-
 # Add actors to the "Størst av alt er kjærligheten" play
 cursor.execute('INSERT INTO actors (name) VALUES (?)', ("Sunniva Du Mond Nordal",))
 sunniva_du_mond_nordal_actor_id = cursor.lastrowid
@@ -253,7 +248,6 @@ cursor.execute('INSERT INTO actors (name) VALUES (?)', ("Natalie Grøndahl Tange
 natalie_grondahl_tangen_actor_id = cursor.lastrowid
 cursor.execute('INSERT INTO actors (name) VALUES (?)', ("Åsmund Flaten",))
 asmund_flaten_actor_id = cursor.lastrowid
-
 
 # Add actors to the "Kongsemnene" play
 cursor.execute('INSERT INTO actors (name) VALUES (?)', ("Arturo Scotti",))
@@ -281,7 +275,6 @@ snorre_ryen_tondel_actor_id = cursor.lastrowid
 cursor.execute('INSERT INTO actors (name) VALUES (?)', ("Madeleine Brantzæg Nilsen",))
 madeleine_brantzaeg_nilsen_actor_id = cursor.lastrowid
 
-
 # Add the played_by relationships for the "Størst av alt er kjærligheten" play
 cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (sunniva_du_mond_nordal_role_id, sunniva_du_mond_nordal_actor_id))
 cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (jo_saberniak_role_id, jo_saberniak_actor_id))
@@ -290,7 +283,6 @@ cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (tor_i
 cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (trond_ove_skrodal_role_id, trond_ove_skrodal_actor_id))
 cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (natalie_grondahl_tangen_role_id, natalie_grondahl_tangen_actor_id))
 cursor.execute('INSERT INTO played_by (role_id, actor_id) VALUES (?, ?)', (asmund_flaten_role_id, asmund_flaten_actor_id))
-
 
 # Add the roles_in_act relationships for the "Størst av alt er kjærligheten" play
 cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (storst_av_alt_er_kjaerligheten_act1_id, sunniva_du_mond_nordal_role_id))
@@ -368,7 +360,6 @@ cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (kong
 cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (kongsemnene_act4_id, peter_role_id))
 cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (kongsemnene_act5_id, peter_role_id))
 
-
 # Add employees to the employees table
 cursor.execute('INSERT INTO employees (name, email, status) VALUES (?, ?, ?)', ("Jonas Corell Petersen", "korall@mail.com", "Fast ansatt"))
 jonas_corell_petersen_employee_id = cursor.lastrowid
@@ -402,7 +393,6 @@ cursor.execute('INSERT INTO tasks (description, play_id, employee_id) VALUES (?,
 cursor.execute('INSERT INTO tasks (description, play_id, employee_id) VALUES (?, ?, ?)', ("Scenografi og kostymer", storst_av_alt_er_kjaerligheten_play_id, david_gehrt_employee_id))
 cursor.execute('INSERT INTO tasks (description, play_id, employee_id) VALUES (?, ?, ?)', ("Lysdesign", storst_av_alt_er_kjaerligheten_play_id, magnus_mikaelsen_employee_id)) 
 cursor.execute('INSERT INTO tasks (description, play_id, employee_id) VALUES (?, ?, ?)', ("Dramaturg", storst_av_alt_er_kjaerligheten_play_id, kristoffer_spender_employee_id))
-
 
 connection.commit()
 connection.close()

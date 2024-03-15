@@ -74,14 +74,29 @@ storst_av_alt_er_kjaerligheten_ticket_purchase_id = cursor.lastrowid
 with open('files needed/hovedscenen.txt', 'r') as f:
     lines = f.readlines()
 
+hovedscenen_areas = []
+
+for i, line in enumerate(lines):
+    if i == 0:
+        continue
+
+    line = line.strip() 
+
+    if line.isalpha():
+        hovedscenen_areas.append(line)
+
+hovedscenen_areas.reverse()
+
+print(hovedscenen_areas)
+
 # Initialize variables
 current_area = None
-current_area_name = None
-seat_number = 520
-row_number = len(lines) - 3
+area_counter = 0
+seat_number = 0
+row_number = 0
 
 # Iterate over each line in the file
-for i, line in enumerate(lines):
+for i, line in reversed(list(enumerate(lines))):
     # Skip the first line
     if i == 0:
         continue
@@ -91,32 +106,21 @@ for i, line in enumerate(lines):
     # Check if the line contains a word or a series of characters
     if line.isalpha():
         # Add an area
-        cursor.execute('INSERT INTO areas (name, hall_id) VALUES (?, ?)', (line, hovedscenen_hall_id))
+        cursor.execute('INSERT INTO areas (name, hall_id) VALUES (?, ?)', (hovedscenen_areas[area_counter], hovedscenen_hall_id))
         current_area = cursor.lastrowid
-        current_area_name = line
+        area_counter += 1
     else:
-        if current_area_name == "Galleri":
-            for j, char in enumerate(line):
-                if char == '0':
-                    cursor.execute('INSERT INTO seats (chair_number, hall_id, area_id) VALUES (?, ?, ?)', (seat_number, hovedscenen_hall_id, current_area))
-                    
-                elif char == '1':
-                    cursor.execute('INSERT INTO seats (chair_number, hall_id, area_id) VALUES (?, ?, ?)', (seat_number, hovedscenen_hall_id, current_area))
-                    seat_id = cursor.lastrowid
-                    cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
-                seat_number -= 1
-        else:
-            row_number -= 1
-            # Iterate over each character and create a seat only if the character is '0' or '1'
-            for j, char in enumerate(line):
-                if char == '0':
-                    cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
-                    
-                elif char == '1':
-                    cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
-                    seat_id = cursor.lastrowid
-                    cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
-                seat_number -= 1
+        row_number += 1
+        # Iterate over each character and create a seat only if the character is '0' or '1'
+        for j, char in enumerate(line):
+            seat_number += 1
+            if char == '0':
+                cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
+                
+            elif char == '1':
+                cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
+                seat_id = cursor.lastrowid
+                cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
 
 
 with open('files needed/gamle-scene.txt', 'r') as f:

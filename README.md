@@ -8,7 +8,7 @@
 
 #### Antakelser og begrunnelse
 
-- En forutsetning vi gjorde var i relasjonen mellom Task og Employee. Vi tenkte at det kan forekomme oppgaver som ikke trenger å knyttes mot et bestemt stykke, men fortsatt være en arbeidsoppgave, for eksempel vedlikehold av scener. 
+- En forutsetning vi gjorde var i relasjonen mellom Task og Employee. Vi tenkte at det kan forekomme oppgaver som ikke trenger å knyttes mot et bestemt stykke, men fortsatt være en arbeidsoppgave, for eksempel vedlikehold av scener.
 - Vi tenkte også at det ikke ville forekomme stykker som ikke trengte at noen oppgaver måtte gjøres.
 - “Time” i “Showings” og “Ticket_purchases” tilsvarer tid og dato, da dette kan nyttes i SQLite.
 
@@ -86,7 +86,7 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 
 1. Zip-fil med Python-kildekode og SQL-schema er levert på BlackBoard.
 
-2. schema.sql-filen lager alle tabellene, og den blir brukt av seed.py så dere trenger ikke kjøre den selv. Vi har ikke en egen insert-db.sql-fil, fordi INSERT-operasjonene blir gjort i seed.py, siden der kan vi lagre ID-ene som variabler mellom de ulike INSERT-operasjonene. 
+2. schema.sql-filen lager alle tabellene, og den blir brukt av seed.py så dere trenger ikke kjøre den selv. Vi har ikke en egen insert-db.sql-fil, fordi INSERT-operasjonene blir gjort i seed.py, siden der kan vi lagre ID-ene som variabler mellom de ulike INSERT-operasjonene.
 
 3. “files needed” mappen (som vi fikk delt i oppgaven, den som inkluderer “hovedscenen.txt” og “gamle-scene.txt”) og schema.sql må være plassert sammen med seed.py sånn at den scriptet finner filene. Vi har ikke en tom database fil fordi database filen blir lagd i seed.py.
 
@@ -115,6 +115,7 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 1. **Implementasjon av databasen:**
 
     `python3 seed.py` returnerer:
+
     ```
     Database created successfully at trondelag_theatre.db
     Added Halls, Plays, Showings, Ticket Prices, Customers and Ticket Purchases to the database
@@ -123,6 +124,7 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
     Added acts, roles, actors and their relations to the database
     Added employees and tasks to the database
     ```
+
 `
 2. **Innsetting av stoler:**
 
@@ -131,14 +133,16 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 3. **Kjøp av 9 voksenbilletter:**
 
     `python buy_tickets_get_price_same_row.py` returnerer:
+
     ```
     You purchased 9 tickets for Størst av alt er kjærligheten in the Gamle scene for row number 1 with seat numbers [1, 2, 3, 4, 5, 8, 9, 10, 11] in Galleri area for: 3150.0 kr
     You purchased 9 tickets for Størst av alt er kjærligheten in the Gamle scene for row number 1 with seat numbers [12, 13, 14, 15, 16, 17, 18, 19, 20] in Galleri area for: 3150.0 kr
     ```
 
 4. **Forestillinger som finnes på en dato og antall solgte billetter:**
-`
+
     `python find_showings.py` returnerer:
+
     ```
     Showings on 2024-02-02:
     - Kongsemnene (2024-02-02 19:00:00): 0 tickets sold.
@@ -151,6 +155,7 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 5. **Skuespillere som opptrer i de forskjellige teaterstykkene:**
 
     `python find_actor_and_plays.py` returnerer:
+
     ```
     Tom Hanks does not appear in any plays.
     Jo Saberniak appears in the following plays and roles:
@@ -163,6 +168,7 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 6. **Forestillingene som har solgt best:**
 
     `python sort_by_selling.py` returnerer:
+
     ```
     - Kongsemnene - Date: 2024-02-03 19:00:00 - Tickets sold: 65
     - Størst av alt er kjærligheten - Date: 2024-02-03 18:30:00 - Tickets sold: 36
@@ -170,12 +176,13 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 
 7. **Gitt et skuespillernavn, andre skuespillere de har spilt i samme akt med:**
 
-`python find_actor_and_coactors.py` returnerer:
+    `python find_actor_and_coactors.py` returnerer:
+
     ```
     No co-actors found for Tom Hanks
     Actors who have played with Arturo Scotti in the same act:
     - Arturo Scotti and Emil Olafsson in "Kongsemnene"
-    - Arturo Sc``tti and Emma Caroline Deichmann in "Kongsemnene"
+    - Arturo Scotti and Emma Caroline Deichmann in "Kongsemnene"
     - Arturo Scotti and Hans Petter Nilsen in "Kongsemnene"
     - Arturo Scotti and Ingunn Beate Strige Øyen in "Kongsemnene"
     - Arturo Scotti and Isak Holkem Sørensen in "Kongsemnene"

@@ -1,6 +1,13 @@
+import os
 import sqlite3
 
-connection = sqlite3.connect('trondelag_theatre.db')
+db_path = 'trondelag_theatre.db'
+
+# Delete the database file if it exists
+if os.path.exists(db_path):
+    os.remove(db_path)
+
+connection = sqlite3.connect(db_path)
 
 cursor = connection.cursor()
 
@@ -8,7 +15,6 @@ with open('schema.sql', 'r') as f:
     schema = f.read()
 
 cursor.executescript(schema)
-
 # Add "Hovedscenen" and "Gamle scene" to the halls table
 cursor.execute('INSERT INTO halls (name) VALUES ("Hovedscenen")')
 hovedscenen_hall_id = cursor.lastrowid

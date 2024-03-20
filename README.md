@@ -125,7 +125,6 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
     Added employees and tasks to the database
     ```
 
-`
 2. **Innsetting av stoler:**
 
     Se punkt 1. Stolene blir fylt inn i `seed.py` scriptet etter at vi har fylt inn alt av data som oppgaven spør om.

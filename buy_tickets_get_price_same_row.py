@@ -7,14 +7,20 @@ cursor = connection.cursor()
 def create_customer(name, mobile_number, address):
     try:
         cursor.execute("""
+            SELECT id FROM customers WHERE name = ? AND mobile_number = ? AND address = ?
+        """, (name, mobile_number, address))
+        customer = cursor.fetchone()
+        if customer is not None:
+            return customer[0]
+
+        cursor.execute("""
             INSERT INTO customers (name, mobile_number, address)
             VALUES (?, ?, ?)
         """, (name, mobile_number, address))
         connection.commit()
         return cursor.lastrowid
     except Exception as e:
-        print(f"Error occurred while creating customer: {e}")
-
+        print(f"Error occurred while creating or fetching customer: {e}")
 def create_ticket_purchase(customer_id):
     try:
         current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')

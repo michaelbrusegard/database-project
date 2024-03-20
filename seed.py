@@ -6,6 +6,7 @@ db_path = 'trondelag_theatre.db'
 # Delete the database file if it exists
 if os.path.exists(db_path):
     os.remove(db_path)
+    print (f"Deleted the existing database at {db_path}")
 
 connection = sqlite3.connect(db_path)
 

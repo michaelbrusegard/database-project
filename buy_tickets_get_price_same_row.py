@@ -110,5 +110,6 @@ def buy_tickets_get_price_same_row(play_name, date, group_category, amount, name
     print(f"You purchased {amount} tickets for {play_name} in the {hall_name} for row number {row_number} with seat numbers {chair_numbers} in {area_name} area for: {ticket_price * amount} kr")
 
 buy_tickets_get_price_same_row('Størst av alt er kjærligheten', '2024-02-03', 'Ordinary', 9, 'Ola Nordmann', '12345678', 'ola@nordmann.no')
+buy_tickets_get_price_same_row('Størst av alt er kjærligheten', '2024-02-03', 'Ordinary', 9, 'Kari Nordmann', '87654321', 'kari@nordmann.no')
 
 connection.close()

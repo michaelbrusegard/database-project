@@ -79,3 +79,120 @@ Vi markerer primærnøkler med understrek og fremmednøkler i kursiv.
 **tasks**(<u>task_id</u>, description, play_id, *employee_id*)
 
 - Oppfyller alle normalformene av samme grunner som tidligere nevnt - unik identifier, ingen delvise- eller transitive avhengigheter, alle avhengigheter er funksjonelle og ingen flerverdiavhengigheter.
+
+## Realisert databasesytem
+
+### Innlevering
+
+1. Zip-fil med Python-kildekode og SQL-schema er levert på BlackBoard.
+
+2. schema.sql-filen lager alle tabellene, og den blir brukt av seed.py så dere trenger ikke kjøre den selv. Vi har ikke en egen insert-db.sql-fil, fordi INSERT-operasjonene blir gjort i seed.py, siden der kan vi lagre ID-ene som variabler mellom de ulike INSERT-operasjonene. 
+
+3. “files needed” mappen (som vi fikk delt i oppgaven, den som inkluderer “hovedscenen.txt” og “gamle-scene.txt”) og schema.sql må være plassert sammen med seed.py sånn at den scriptet finner filene. Vi har ikke en tom database fil fordi database filen blir lagd i seed.py.
+
+### Fremgangsmåte
+
+1. Pass på at filene er strukturert slik:
+   - files needed
+       - gamle-scene.txt
+       - hovedscenen.txt
+   - schema.sql
+   - seed.py
+   - buy_tickets_get_price_same_row.py
+   - find_showings.py
+   - find_actor_and_plays.py
+   - find_actor_and_coactors.py
+   - bestseller.py
+
+2. Deretter sjekk at du har python installert. Vi har brukt python-versjon 3.10.
+
+3. Kjør `python seed.py` (kan hende du må bytte python med python3 i denne kommandoen) Du skal nå få en trondelag_theatre.db fil med data.
+
+4. Kjør så hvert av scriptene på formen `python script.py`og sjekk database filen at du er fornøyd med resultatet.
+
+### Resultat av brukerhistoriene
+
+1. **Implementasjon av databasen:**
+
+    `python3 seed.py` returnerer:
+    ```
+    Database created successfully at trondelag_theatre.db
+    Added Halls, Plays, Showings, Ticket Prices, Customers and Ticket Purchases to the database
+    Added seats and the ones already occupied for the Hovedscenen hall from the file hovedscenen.txt
+    Added seats and the ones already occupied for the Gamle scene hall from the file gamle-scene.txt
+    Added acts, roles, actors and their relations to the database
+    Added employees and tasks to the database
+    ```
+`
+2. **Innsetting av stoler:**
+
+    Se punkt 1. Stolene blir fylt inn i `seed.py` scriptet etter at vi har fylt inn alt av data som oppgaven spør om.
+
+3. **Kjøp av 9 voksenbilletter:**
+
+    `python buy_tickets_get_price_same_row.py` returnerer:
+    ```
+    You purchased 9 tickets for Størst av alt er kjærligheten in the Gamle scene for row number 1 with seat numbers [1, 2, 3, 4, 5, 8, 9, 10, 11] in Galleri area for: 3150.0 kr
+    You purchased 9 tickets for Størst av alt er kjærligheten in the Gamle scene for row number 1 with seat numbers [12, 13, 14, 15, 16, 17, 18, 19, 20] in Galleri area for: 3150.0 kr
+    ```
+
+4. **Forestillinger som finnes på en dato og antall solgte billetter:**
+`
+    `python find_showings.py` returnerer:
+    ```
+    Showings on 2024-02-02:
+    - Kongsemnene (2024-02-02 19:00:00): 0 tickets sold.
+    Showings on 2024-02-03:
+    - Størst av alt er kjærligheten (2024-02-03 18:30:00): 36 tickets sold.
+    - Kongsemnene (2024-02-03 19:00:00): 65 tickets sold.
+    No showings on 2024-02-04.
+    ```
+
+5. **Skuespillere som opptrer i de forskjellige teaterstykkene:**
+
+    `python find_actor_and_plays.py` returnerer:
+    ```
+    Tom Hanks does not appear in any plays.
+    Jo Saberniak appears in the following plays and roles:
+    - Play: Størst av alt er kjærligheten, Role: Jo Saberniak
+    Emma Caroline Deichmann appears in the foll`w`ing plays and roles:
+    - Play: Kongsemnene, Role: Sigrid
+    - Play: Kongsemnene, Role: Ingebjørg
+    ```
+
+6. **Forestillingene som har solgt best:**
+
+    `python sort_by_selling.py` returnerer:
+    ```
+    - Kongsemnene - Date: 2024-02-03 19:00:00 - Tickets sold: 65
+    - Størst av alt er kjærligheten - Date: 2024-02-03 18:30:00 - Tickets sold: 36
+    ```
+
+7. **Gitt et skuespillernavn, andre skuespillere de har spilt i samme akt med:**
+
+`python find_actor_and_coactors.py` returnerer:
+    ```
+    No co-actors found for Tom Hanks
+    Actors who have played with Arturo Scotti in the same act:
+    - Arturo Scotti and Emil Olafsson in "Kongsemnene"
+    - Arturo Sc``tti and Emma Caroline Deichmann in "Kongsemnene"
+    - Arturo Scotti and Hans Petter Nilsen in "Kongsemnene"
+    - Arturo Scotti and Ingunn Beate Strige Øyen in "Kongsemnene"
+    - Arturo Scotti and Isak Holkem Sørensen in "Kongsemnene"
+    - Arturo Scotti and Madeleine Brantzæg Nilsen in "Kongsemnene"
+    - Arturo Scotti and Per Bogstad Gulliksen in "Kongsemnene"
+    - Arturo Scotti and Snorre Ryen Tøndel in "Kongsemnene"
+    - Arturo Scotti and Synnøve Fossum Eriksen in "Kongsemnene"
+    - Arturo Scotti and Thomas Jensen Takyi in "Kongsemnene"
+    Actors who have played with Snorre Ryen Tøndel in the same act:
+    - Snorre Ryen Tøndel and Arturo Scotti in "Kongsemnene"
+    - Snorre Ryen Tøndel and Emil Olafsson in "Kongsemnene"
+    - Snorre Ryen Tøndel and Emma Caroline Deichmann in "Kongsemnene"
+    - Snorre Ryen Tøndel and Hans Petter Nilsen in "Kongsemnene"
+    - Snorre Ryen Tøndel and Ingunn Beate Strige Øyen in "Kongsemnene"
+    - Snorre Ryen Tøndel and Isak Holkem Sørensen in "Kongsemnene"
+    - Snorre Ryen Tøndel and Madeleine Brantzæg Nilsen in "Kongsemnene"
+    - Snorre Ryen Tøndel and Per Bogstad Gulliksen in "Kongsemnene"
+    - Snorre Ryen Tøndel and Synnøve Fossum Eriksen in "Kongsemnene"
+    - Snorre Ryen Tøndel and Thomas Jensen Takyi in "Kongsemnene"
+    ```

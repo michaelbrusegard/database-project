@@ -15,6 +15,9 @@ with open('schema.sql', 'r') as f:
     schema = f.read()
 
 cursor.executescript(schema)
+
+print(f"Database created successfully at {db_path}")
+
 # Add "Hovedscenen" and "Gamle scene" to the halls table
 cursor.execute('INSERT INTO halls (name) VALUES ("Hovedscenen")')
 hovedscenen_hall_id = cursor.lastrowid
@@ -75,6 +78,9 @@ kongsemnene_ticket_purchase_id = cursor.lastrowid
 cursor.execute('INSERT INTO ticket_purchases (time, customer_id) VALUES (?, ?)', ("2024-01-01 00:00:00", trondheim_teater_customer_id))
 storst_av_alt_er_kjaerligheten_ticket_purchase_id = cursor.lastrowid
 
+connection.commit()
+print("Added Halls, Plays, Showings, Ticket Prices, Customers and Ticket Purchases to the database")
+
 # Add seats and areas to the "Hovedscenen" hall
 with open('files needed/hovedscenen.txt', 'r') as f:
     lines = f.readlines()
@@ -118,6 +124,9 @@ for i, line in reversed(list(enumerate(lines))):
                 cursor.execute('INSERT INTO seats (row_number, chair_number, hall_id, area_id) VALUES (?, ?, ?, ?)', (row_number, seat_number, hovedscenen_hall_id, current_area))
                 seat_id = cursor.lastrowid
                 cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', (kongsemnene_3feb_showing_id, seat_id, kongsemnene_ticket_purchase_id, group_10_kongsemnene_ticket_price_id))
+
+connection.commit()
+print(f"Added seats and the ones already occupied for the Hovedscenen hall from the file hovedscenen.txt")
 
 with open('files needed/gamle-scene.txt', 'r') as f:
     lines = f.readlines()
@@ -170,6 +179,9 @@ for i, line in enumerate(lines):
                     seat_id = cursor.lastrowid
                     cursor.execute('INSERT INTO tickets (showing_id, seat_id, ticket_purchase_id, ticket_price_id) VALUES (?, ?, ?, ?)', 
                                    (storst_av_alt_er_kjaerligheten_3feb_showing_id, seat_id, storst_av_alt_er_kjaerligheten_ticket_purchase_id, group_10_storst_av_alt_er_kjaerligheten_ticket_price_id))
+
+connection.commit()
+print(f"Added seats and the ones already occupied for the Gamle scene hall from the file gamle-scene.txt")
 
 # Add the acts for the "Kongsemnene" play
 cursor.execute('INSERT INTO acts (number, name, play_id) VALUES (?, ?, ?)', (1, "Act 1", kongsemnene_play_id))
@@ -364,6 +376,9 @@ cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (kong
 cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (kongsemnene_act4_id, peter_role_id))
 cursor.execute('INSERT INTO roles_in_act (act_id, role_id) VALUES (?, ?)', (kongsemnene_act5_id, peter_role_id))
 
+connection.commit()
+print("Added acts, roles, actors and their relations to the database")
+
 # Add employees to the employees table
 cursor.execute('INSERT INTO employees (name, email, status) VALUES (?, ?, ?)', ("Jonas Corell Petersen", "korall@mail.com", "Fast ansatt"))
 jonas_corell_petersen_employee_id = cursor.lastrowid
@@ -399,4 +414,6 @@ cursor.execute('INSERT INTO tasks (description, play_id, employee_id) VALUES (?,
 cursor.execute('INSERT INTO tasks (description, play_id, employee_id) VALUES (?, ?, ?)', ("Dramaturg", storst_av_alt_er_kjaerligheten_play_id, kristoffer_spender_employee_id))
 
 connection.commit()
+print("Added employees and tasks to the database")
+
 connection.close()

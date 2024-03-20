@@ -1,9 +1,9 @@
 import sqlite3
 
-def find_actor_and_plays(actor):
-    connection = sqlite3.connect('trondelag_theatre.db')
-    cursor = connection.cursor()
+connection = sqlite3.connect('trondelag_theatre.db')
+cursor = connection.cursor()
 
+def find_actor_and_plays(actor):
     query = """
     SELECT DISTINCT
         p.name AS PlayName,
@@ -28,8 +28,8 @@ def find_actor_and_plays(actor):
     else:
         print(f"{actor} does not appear in any plays.")
 
-    connection.close()
-
 find_actor_and_plays("Tom Hanks")
 find_actor_and_plays("Jo Saberniak")
 find_actor_and_plays("Emma Caroline Deichmann")
+
+connection.close()

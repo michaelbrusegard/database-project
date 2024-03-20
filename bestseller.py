@@ -1,8 +1,9 @@
 import sqlite3
-def sort_by_selling():
-    connection = sqlite3.connect('trondelag_theatre.db')
-    cursor = connection.cursor()
 
+connection = sqlite3.connect('trondelag_theatre.db')
+cursor = connection.cursor()
+
+def sort_by_selling():
     sql_query = """
     SELECT 
         tickets.showing_id, 
@@ -27,5 +28,6 @@ def sort_by_selling():
     showing = cursor.fetchall()
     for show in showing:
         print(f"- {show[5]} - Date: {show[2]} - Tickets sold: {show[6]}")
-    connection.close()
+
 sort_by_selling()
+connection.close()

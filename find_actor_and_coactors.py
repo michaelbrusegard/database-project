@@ -1,9 +1,10 @@
 import sqlite3
 
-def find_actor_and_coactors(actor_name):
-    connection = sqlite3.connect('trondelag_theatre.db')
-    cursor = connection.cursor()
+connection = sqlite3.connect('trondelag_theatre.db')
+cursor = connection.cursor()
 
+
+def find_actor_and_coactors(actor_name):
     query = """
     SELECT DISTINCT
         a1.name AS ActorName,
@@ -31,8 +32,8 @@ def find_actor_and_coactors(actor_name):
     else:
         print(f"No co-actors found for {actor_name}.")
 
-    connection.close()
-
 find_actor_and_coactors("Tom Hanks")
 find_actor_and_coactors("Arturo Scotti")
 find_actor_and_coactors("Snorre Ryen Tøndel")
+
+connection.close()

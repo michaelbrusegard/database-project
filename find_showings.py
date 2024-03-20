@@ -18,12 +18,12 @@ def find_showings(date):
     """
 
     cursor.execute(query, (f'{date}%',))
-    showings = cursor.fetchall()
+    results = cursor.fetchall()
 
-    if showings:
+    if results:
         print(f"Showings on {date}:")
-        for showing in showings:
-            print(f"- {showing[0]} ({showing[1]}): {showing[2]} tickets sold.")
+        for result in results:
+            print(f"- {result[0]} ({result[1]}): {result[2]} tickets sold.")
     else:
         print(f"No showings on {date}.")
 
